@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bunty.exe — Birthday Protocol ♡</title>
+<meta name="description" content="A tiny chaotic birthday universe made for Bunty.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+:root{
+  --ink:#19161a; --cream:#fff8f0; --pink:#ff9dbb; --hot:#ff5d91;
+  --peach:#ffd5bd; --lav:#dcd2ff; --mint:#c9f3df; --yellow:#ffe795;
+  --muted:#746d75; --white:#fffdfb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--cream);color:var(--ink)}
+button{font:inherit}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;transform:translateX(7%) scale(.98);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.page.active{opacity:1;pointer-events:auto;transform:none}
+.page::-webkit-scrollbar{width:7px}.page::-webkit-scrollbar-thumb{background:#d6c5c9;border-radius:99px}
+.container{width:min(1080px,92vw);margin:auto;padding:48px 0 90px}
+.mono{font-family:"DM Mono",monospace}
+.eyebrow{font:500 12px "DM Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#8b5d69}
+h1{font-size:clamp(48px,9vw,104px);line-height:.92;letter-spacing:-.065em}
+h2{font-size:clamp(34px,6vw,68px);line-height:.95;letter-spacing:-.045em}
+h3{font-size:22px}
+p{line-height:1.7;color:#5e565d}
+.btn{border:0;border-radius:999px;padding:15px 22px;background:var(--ink);color:white;cursor:pointer;font-weight:700;box-shadow:0 8px 0 #000;transition:.2s;display:inline-flex;gap:9px;align-items:center}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 0 #000}
+.btn:active{transform:translateY(5px);box-shadow:0 3px 0 #000}
+.btn.light{background:white;color:var(--ink);box-shadow:0 7px 0 #d9c9cc}
+.card{background:rgba(255,255,255,.7);border:1px solid rgba(25,22,26,.1);border-radius:28px;box-shadow:0 20px 60px rgba(80,55,65,.09)}
+/* page 1 */
+#p1{background:radial-gradient(circle at 80% 20%,#ffd4e2 0 12%,transparent 30%),radial-gradient(circle at 10% 90%,#d8d0ff 0 10%,transparent 28%),var(--cream)}
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;position:relative}
+.hero .terminal{width:min(700px,100%);margin:25px auto;padding:22px;text-align:left;background:#171419;color:#f9edf1;border-radius:22px;box-shadow:0 25px 70px rgba(33,22,29,.2);font:14px/1.75 "DM Mono",monospace}
+.term-top{display:flex;gap:7px;margin-bottom:14px}.dot{width:10px;height:10px;border-radius:50%;background:#ff8cab}.dot:nth-child(2){background:#ffd36b}.dot:nth-child(3){background:#8ee7bd}
+.cursor{display:inline-block;width:8px;height:15px;background:#ff9dbb;animation:blink .8s steps(1) infinite;vertical-align:middle}
+@keyframes blink{50%{opacity:0}}
+.floating{position:absolute;font-size:30px;animation:float 4s ease-in-out infinite;user-select:none}.f1{top:9%;left:10%}.f2{top:20%;right:9%;animation-delay:1s}.f3{bottom:12%;left:8%;animation-delay:2s}.f4{bottom:18%;right:12%;animation-delay:.5s}
+@keyframes float{50%{transform:translateY(-18px) rotate(7deg)}}
+.glitch{animation:glitch 2.8s infinite}.glitch span{display:inline-block}
+@keyframes glitch{0%,90%,100%{transform:none}92%{transform:skew(-2deg);text-shadow:3px 0 var(--hot),-3px 0 #78c8ff}94%{transform:skew(2deg);text-shadow:-3px 0 var(--hot),3px 0 #78c8ff}}
+/* page 2 */
+#p2{background:linear-gradient(135deg,#fff5f7,#f4efff)}
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:35px 0}
+.status{padding:24px;border-radius:22px;background:white;border:1px solid #eadfe2}.bar{height:11px;border-radius:20px;background:#eee4e7;overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--hot),#ffca8e);border-radius:20px;transition:1.2s}
+.alert{padding:28px;border-radius:28px;background:#171419;color:white;position:relative;overflow:hidden}.alert:after{content:"";position:absolute;width:200px;height:200px;border-radius:50%;background:#ff6f9a;filter:blur(70px);right:-60px;top:-80px;opacity:.4}
+.quote{font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(25px,4vw,40px);line-height:1.25;color:#fff;position:relative;z-index:1}
+.pill{display:inline-block;padding:8px 12px;border-radius:99px;background:#ffe1ea;font:500 12px "DM Mono",monospace;margin:4px}
+/* page 3 */
+#p3{background:#fffaf3}
+.gallery-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:30px}
+.gallery{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+.photo{position:relative;overflow:hidden;border-radius:28px;background:#ddd;min-height:300px;box-shadow:0 18px 50px rgba(67,49,40,.12)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s}
+.photo:hover img{transform:scale(1.05) rotate(.5deg)}
+.photo.tall{grid-row:span 2;min-height:660px}
+.photo .caption{position:absolute;left:16px;right:16px;bottom:16px;padding:14px 16px;border-radius:18px;background:rgba(255,253,251,.9);backdrop-filter:blur(10px);font-weight:700}
+.sticker{position:absolute;top:14px;right:14px;padding:9px 12px;border-radius:99px;background:var(--yellow);font:600 12px "DM Mono",monospace;transform:rotate(4deg);z-index:2}
+/* page 4 */
+#p4{background:radial-gradient(circle at 80% 15%,#ffd7e5,transparent 25%),radial-gradient(circle at 15% 80%,#d9d1ff,transparent 30%),#fff9f4}
+.memory{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+.memory .card{padding:24px;min-height:210px;position:relative;overflow:hidden}
+.memory .num{font:500 11px "DM Mono";color:#a58b93}
+.memory .big{font-size:28px;font-weight:800;letter-spacing:-.04em;margin-top:18px}
+.memory .tiny{font:13px/1.6 "DM Mono";margin-top:12px;color:#776b72}
+.memory .card:nth-child(2){transform:rotate(1.5deg)}.memory .card:nth-child(3){transform:rotate(-1.2deg)}
+/* page 5 */
+#p5{background:#171419;color:white}
+.final{min-height:100vh;display:grid;place-items:center;text-align:center;position:relative}
+.final p{color:#c8bbc1;max-width:650px;margin:22px auto}
+.letter{max-width:720px;padding:34px;border:1px solid #3c3238;border-radius:28px;background:#211c21;text-align:left;margin:30px auto;color:#f6e9ee}
+.letter p{color:#ddced4}.signature{font-family:"Playfair Display",serif;font-style:italic;font-size:27px;color:#ffb1c9!important}
+.page:after{content:"♡  ✦  made with friendship  ✦  ♡";position:fixed;left:50%;bottom:9px;transform:translateX(-50%);font:9px "DM Mono";letter-spacing:.08em;color:#a58d96;pointer-events:none;opacity:.75}.nav{position:fixed;z-index:20;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:7px;padding:7px;background:rgba(255,255,255,.72);backdrop-filter:blur(15px);border:1px solid rgba(25,22,26,.1);border-radius:99px;box-shadow:0 12px 40px rgba(0,0,0,.12)}
+.nav button{border:0;background:transparent;width:35px;height:35px;border-radius:50%;cursor:pointer;font-weight:800;color:#81777d}.nav button.active{background:var(--ink);color:#fff}
+.confetti{position:fixed;top:-20px;width:10px;height:16px;z-index:100;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translate3d(var(--x),110vh,0) rotate(720deg);opacity:.9}}
+.heart{position:fixed;z-index:99;pointer-events:none;animation:heart 2.2s ease-out forwards;font-size:25px}
+@keyframes heart{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:1}100%{transform:translateY(-220px) rotate(20deg) scale(1.2);opacity:0}}
+.reveal{opacity:0;transform:translateY(20px);transition:.8s}.active .reveal{opacity:1;transform:none}
+@media(max-width:760px){
+ .container{padding:35px 0 90px}.status-grid,.gallery,.memory{grid-template-columns:1fr}
+ .photo.tall{grid-row:auto;min-height:430px}.photo{min-height:300px}
+ .gallery-head{align-items:start;flex-direction:column}
+ h1{font-size:58px}.terminal{font-size:12px!important}
+}
+
+/* REAL CANDLE BLOW EXPERIENCE */
+.candle-stage{width:min(720px,92vw);margin:28px auto 0;padding:28px 20px 24px;border-radius:30px;background:#fff;border:1px solid #00000010;box-shadow:0 22px 70px #4c30390f;text-align:center;position:relative;overflow:hidden}.candle-stage:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,#ffe5ef,transparent 42%);pointer-events:none}.cake2{position:relative;width:290px;height:210px;margin:5px auto 0;z-index:1}.cake2 .plate{position:absolute;left:10px;right:10px;bottom:18px;height:18px;border-radius:50%;background:#d7c4ca}.cake2 .base{position:absolute;left:45px;right:45px;bottom:35px;height:92px;border-radius:18px 18px 25px 25px;background:#fff;border:3px solid #ff9dbb;box-shadow:inset 0 -18px #ffd9e6}.cake2 .icing{position:absolute;left:50px;right:50px;bottom:105px;height:34px;border-radius:50%;background:#ffd8e5;border:3px solid #ff9dbb}.cake2 .candle{position:absolute;left:50%;bottom:128px;transform:translateX(-50%);width:22px;height:66px;border-radius:7px;background:repeating-linear-gradient(135deg,#a895ea 0 7px,#fff 7px 14px);border:2px solid #8f7bd0}.cake2 .flame{position:absolute;left:50%;top:-38px;transform:translateX(-50%);font-size:34px;filter:drop-shadow(0 0 8px #ffc66b);animation:flicker .45s ease-in-out infinite alternate}.cake2 .flame.off{display:none}.smoke{position:absolute;left:50%;bottom:186px;transform:translateX(-50%);font-size:30px;opacity:0;z-index:3}.smoke.on{animation:smoke 1.8s ease-out forwards}@keyframes smoke{0%{opacity:0;transform:translate(-50%,10px) scale(.7)}25%{opacity:.75}100%{opacity:0;transform:translate(-40%, -70px) scale(1.4)}}@keyframes flicker{to{transform:translateX(-50%) scale(1.13) rotate(2deg)}}.mic-status{font:11px "DM Mono";color:#8c7b84;margin:7px 0 16px;min-height:18px}.blowrow{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.micbtn{background:#171319;color:#fff;border:0;border-radius:999px;padding:13px 19px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #000}.micbtn.listening{background:#ff7199;box-shadow:0 5px 0 #d34d74;animation:micPulse 1s infinite}.tapbtn{background:#fff;border:1px solid #ddd0d5;border-radius:999px;padding:13px 19px;font-weight:900;cursor:pointer}@keyframes micPulse{50%{transform:scale(1.04)}}.secret{width:min(430px,90vw);padding:13px 15px;border:1px solid #ddd2d7;border-radius:14px;font:inherit;margin:4px 0 10px}.secret:focus{outline:2px solid #ffabc1}.revealed{display:none}.revealed.show{display:block;animation:revealBig .8s ease forwards}@keyframes revealBig{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}.finalburst{font-size:clamp(45px,8vw,88px);font-weight:900;line-height:.9;letter-spacing:-.07em;color:#171319}.wishlocked{font:11px "DM Mono";color:#9a7d88;margin-top:10px}
+@media(max-width:760px){.cake2{transform:scale(.9);margin-top:-5px;margin-bottom:-15px}.candle-stage{padding:20px 12px}.finalburst{font-size:58px}}
+</style>
+</head>
+<body>
+
+<section class="page active" id="p1">
+ <div class="hero container">
+   <div class="floating f1">🎀</div><div class="floating f2">💻</div><div class="floating f3">🧸</div><div class="floating f4">✨</div>
+   <div class="reveal">
+     <div class="eyebrow">incoming transmission / birthday protocol</div>
+     <h1 class="glitch" style="margin:18px 0 24px">Bunty<span style="color:var(--hot)">.exe</span></h1>
+     <p style="max-width:620px;margin:auto">A completely unnecessary, slightly chaotic, highly important software update has arrived.</p>
+     <div class="terminal">
+       <div class="term-top"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+       <div>&gt; booting birthday_protocol...</div>
+       <div>&gt; locating Bunty........................ <b style="color:#aaf0cc">FOUND ✓</b></div>
+       <div>&gt; checking cutipie status.............. <b style="color:#aaf0cc">EXTREME ✓</b></div>
+       <div>&gt; checking golu-molu levels............ <b style="color:#aaf0cc">DANGEROUS ✓</b></div>
+       <div>&gt; checking patience.................... <b style="color:#ffb2c7">ERROR</b></div>
+       <div>&gt; final diagnosis: <b style="color:#ffd98c">birthday girl detected.</b> <span class="cursor"></span></div>
+     </div>
+     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn" onclick="go(1);chime()">INITIALIZE SURPRISE →</button><button class="btn light" onclick="prankNo()">NOPE 😐</button></div>
+   </div>
+ </div>
+</section>
+
+<section class="page" id="p2">
+ <div class="container">
+   <div class="eyebrow reveal">system diagnosis / subject: Disha aka Bunty</div>
+   <h2 class="reveal" style="margin:14px 0 10px">We need to talk<br><em>about your behavior.</em></h2>
+   <p class="reveal" style="max-width:690px">The system has analyzed the evidence. Unfortunately, it has found you guilty of being extremely Bunty.</p>
+   <div class="status-grid">
+    <div class="status reveal"><b>Cutipie level</b><div class="bar"><i style="width:98%"></i></div></div>
+    <div class="status reveal"><b>Golu-molu energy</b><div class="bar"><i style="width:94%"></i></div></div>
+    <div class="status reveal"><b>“Meko dimaagi dikkat ho jayega” frequency</b><div class="bar"><i style="width:91%"></i></div></div>
+    <div class="status reveal"><b>Patience for Honey being late</b><div class="bar"><i style="width:4%"></i></div></div>
+   </div>
+   <div class="alert reveal">
+      <div class="pill">⚠️ PRIORITY ALERT</div>
+      <div class="quote">“MEKO DIMAAGI DIKKAT HO JAYEGA.”</div>
+      <p style="margin-top:12px;position:relative;z-index:1;color:#bfaeb5">Signature Bunty response detected whenever life becomes even 2% irritating.</p>
+   </div>
+   <div style="text-align:center;margin-top:35px"><button class="btn light" onclick="go(2);chime()">SHOW ME THE EVIDENCE 📸</button></div>
+ </div>
+</section>
+
+<section class="page" id="p3">
+ <div class="container">
+  <div class="gallery-head">
+   <div>
+    <div class="eyebrow">classified bunty archive / evidence 001–004</div>
+    <h2 style="margin-top:12px">The gallery<br><em>of allegations.</em></h2>
+   </div>
+   <div class="mono" style="font-size:12px;color:#8a7d84">WARNING: cuteness may be excessive.</div>
+  </div>
+  <div class="gallery">
+   <figure class="photo tall reveal">
+    <span class="sticker">BUNTY BEING BUNTY™</span>
+    <img src="images/bunty1.jpeg" alt="Bunty making pottery">
+    <figcaption class="caption">“Multitalented? yes. Peaceful? absolutely not.” 🏺</figcaption>
+   </figure>
+   <figure class="photo reveal">
+    <span class="sticker">SUN.exe ☀️</span>
+    <img src="images/bunty2.jpeg" alt="Bunty smiling in a car">
+    <figcaption class="caption">“Caught smiling before saying ‘dheere bol thora’.”</figcaption>
+   </figure>
+   <figure class="photo reveal">
+    <span class="sticker">SNACK PROTOCOL 🍨</span>
+    <img src="images/bunty3.jpeg" alt="Bunty with a dessert">
+    <figcaption class="caption">“Evidence that Bunty can, in fact, be bribed with food.”</figcaption>
+   </figure>
+   <figure class="photo reveal">
+    <span class="sticker">CUTIPIE ALERT 🎀</span>
+    <img src="images/bunty4.jpeg" alt="Bunty in a cute outfit">
+    <figcaption class="caption">“System status: suspiciously adorable.”</figcaption>
+   </figure>
+  </div>
+  <div style="text-align:center;margin-top:38px"><button class="btn" onclick="go(3);chime()">ACCESS FRIENDSHIP FILES →</button></div>
+ </div>
+</section>
+
+<section class="page" id="p4">
+ <div class="container">
+  <div class="eyebrow reveal">friendship.dll / private memories</div>
+  <h2 class="reveal" style="margin-top:12px">Things the system<br><em>will never forget.</em></h2>
+  <div class="memory">
+   <div class="card reveal"><div class="num">01 / ATTENDANCE BUG</div><div class="big">“Kaha h? Kaha h? JLDI AA.”</div><div class="tiny">Honey is late. Bunty has apparently initiated approximately 15 calls. College survival protocol: activated.</div></div>
+   <div class="card reveal"><div class="num">02 / FOOD REVIEW</div><div class="big">“Oil km dala kr thora.”</div><div class="tiny">Followed, somehow, by the highest possible rating: “perfect wife material hnnn.”</div></div>
+   <div class="card reveal"><div class="num">03 / AUDIO SETTINGS</div><div class="big">“Dheere bol thora.”</div><div class="tiny">Because Honey's excitement apparently comes with a built-in volume booster.</div></div>
+   <div class="card reveal"><div class="num">04 / BUNTY MODE</div><div class="big">“Sun n beta, jyada mt bol.”</div><div class="tiny">A sentence capable of stopping absolutely nothing.</div></div>
+   <div class="card reveal"><div class="num">05 / NAVIGATION SYSTEM</div><div class="big">Hand → grab → “Jaldi chal.”</div><div class="tiny">One tiny gesture. One of those little things that somehow means a lot.</div></div>
+   <div class="card reveal"><div class="num">06 / EMOTIONAL SUPPORT</div><div class="big">You always listen.</div><div class="tiny">Even when the story is long, boring, random, or completely unnecessary. You still make sure I don't feel alone.</div></div>
+  </div>
+  <div style="text-align:center;margin-top:42px"><button class="btn" onclick="go(4);celebrate()">OPEN FINAL MESSAGE 💌</button></div>
+ </div>
+</section>
+
+<section class="page" id="p5">
+ <div class="container" style="text-align:center">
+  <div class="reveal">
+   <div class="eyebrow">birthday protocol / final checkpoint</div>
+   <h1 style="margin:12px 0">Wait... <span style="color:#ff9dbb">one last thing.</span></h1>
+   <p style="max-width:620px;margin:0 auto">Before the actual birthday reveal, Bunty has to do one very important job.</p>
+  </div>
+  <div class="candle-stage reveal">
+   <div class="eyebrow">candle.exe / microphone mode</div>
+   <div class="cake2">
+    <div class="plate"></div><div class="base"></div><div class="icing"></div>
+    <div class="candle"><span class="flame" id="flame">🔥</span></div><div class="smoke" id="smoke">☁️</div>
+   </div>
+   <p style="font-weight:900;margin:0 0 5px;color:#4f4148">Make a wish first. 🤫</p>
+   <input id="wishInput" class="secret" maxlength="70" placeholder="type your secret wish here...">
+   <div class="mic-status" id="micStatus">Then tap the mic and actually blow on your phone. 💨</div>
+   <div class="blowrow">
+    <button class="micbtn" id="micBtn" onclick="startBlow()">🎤 BLOW INTO MIC</button>
+    <button class="tapbtn" onclick="tapBlow()">💨 TAP TO BLOW</button>
+   </div>
+   <div class="wishlocked" id="wishLocked"></div>
+   <div class="revealed" id="birthdayReveal" style="margin-top:28px">
+    <div class="finalburst">HAPPY<br><span style="color:#ff7199">BIRTHDAY,</span><br>BUNTY. 🎂</div>
+    <p style="max-width:590px;margin:18px auto">Wish locked. Candle blown. Chaos deployed. 🩷</p>
+    <div class="mono" style="font-size:11px;color:#8f7a83">FRIENDSHIP STATUS: LIFETIME • UNINSTALL: DISABLED</div>
+    <button class="btn" onclick="celebrate();chime()" style="margin-top:20px">RELEASE MORE CHAOS 🎉</button>
+   </div>
+  </div>
+  <div class="letter reveal" style="max-width:730px;margin:25px auto 0;text-align:left">
+   <p>I don't know exactly when a normal college friendship turned into this weird little connection we have, but I'm genuinely grateful it did.</p>
+   <p>You're the person I can tell absolutely everything to — even the most unnecessary stories — and somehow you still listen. You make sure I'm not just talking into the void, and that means more to me than I probably say.</p>
+   <p>From your 15 calls when I'm late, to “dheere bol thora,” to the food reviews and all the ordinary college moments that somehow became special because you were there — I genuinely love these memories.</p>
+   <p>You're chaotic, funny, cute, dramatic, supportive and occasionally very irritating. Basically... very Bunty. 😂</p>
+   <p class="signature">Happy birthday, my golu molu cutipie. ❤️</p>
+  </div>
+ </div>
+</section>
+
+<div class="nav" aria-label="page navigation">
+ <button onclick="go(0)" class="active">01</button>
+ <button onclick="go(1)">02</button>
+ <button onclick="go(2)">03</button>
+ <button onclick="go(3)">04</button>
+ <button onclick="go(4)">05</button>
+</div>
+
+<script>
+const pages=[...document.querySelectorAll('.page')];
+const dots=[...document.querySelectorAll('.nav button')];
+let current=0;
+function go(n){
+ current=n;
+ pages.forEach((p,i)=>p.classList.toggle('active',i===n));
+ dots.forEach((d,i)=>d.classList.toggle('active',i===n));
+ if(n===4) celebrate();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function confetti(count=90){
+ for(let i=0;i<count;i++){
+  const e=document.createElement('i'); e.className='confetti';
+  e.style.left=Math.random()*100+'vw';
+  e.style.setProperty('--x',(Math.random()*240-120)+'px');
+  e.style.animationDuration=(2.2+Math.random()*2.2)+'s';
+  e.style.transform=`rotate(${Math.random()*360}deg)`;
+  e.style.background=['#ff9dbb','#ffd96e','#a8e6cf','#b9a7ff','#fff'][Math.floor(Math.random()*5)];
+  e.style.borderRadius=Math.random()>.5?'50%':'2px';
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),5000);
+ }
+}
+function hearts(){
+ for(let i=0;i<18;i++){
+  const e=document.createElement('div');e.className='heart';e.textContent=['💗','🎀','✨','🩷'][Math.floor(Math.random()*4)];
+  e.style.left=(10+Math.random()*80)+'vw';e.style.top=(55+Math.random()*30)+'vh';
+  e.style.animationDelay=(Math.random()*.9)+'s';document.body.appendChild(e);
+  setTimeout(()=>e.remove(),3200);
+ }
+}
+function celebrate(){confetti();hearts();chime()}
+function chime(){
+ try{
+  const C=window.AudioContext||window.webkitAudioContext; if(!C)return;
+  const ctx=new C(); const now=ctx.currentTime;
+  [523.25,659.25,783.99,1046.5].forEach((f,i)=>{
+   const o=ctx.createOscillator(),g=ctx.createGain();
+   o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,now+i*.09);
+   g.gain.exponentialRampToValueAtTime(.08,now+i*.09+.02);
+   g.gain.exponentialRampToValueAtTime(.0001,now+i*.09+.22);
+   o.connect(g);g.connect(ctx.destination);o.start(now+i*.09);o.stop(now+i*.09+.24);
+  });
+ }catch(e){}
+}
+function prankNo(){toast('Nice try. Bunty.exe says NO is not an available option. 😭');chime()}
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowRight') go(Math.min(4,current+1));
+ if(e.key==='ArrowLeft') go(Math.max(0,current-1));
+});
+
+let blowDone=false;
+function lockWish(){const w=document.getElementById('wishInput').value.trim();document.getElementById('wishLocked').textContent=w?'🔒 Wish received. Classified forever. 🤫':'🔒 Wish received. Classified forever. 🤫';}
+function candleOff(){if(blowDone)return;blowDone=true;document.getElementById('flame').classList.add('off');document.getElementById('smoke').classList.add('on');document.getElementById('wishLocked').textContent='🔒 Wish received. Classified forever. 🤫';document.getElementById('micStatus').textContent='🔥 Flame OFF. Wish locked. Birthday protocol deployed!';document.getElementById('birthdayReveal').classList.add('show');document.getElementById('micBtn').textContent='✅ CANDLE BLOWN';document.getElementById('micBtn').classList.remove('listening');confetti(140);hearts();chime();}
+function tapBlow(){candleOff()}
+async function startBlow(){
+ if(blowDone)return;
+ const status=document.getElementById('micStatus'),btn=document.getElementById('micBtn');
+ try{
+  const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+  const C=window.AudioContext||window.webkitAudioContext;const ctx=new C();const analyser=ctx.createAnalyser();analyser.fftSize=1024;const src=ctx.createMediaStreamSource(stream);src.connect(analyser);
+  const data=new Uint8Array(analyser.fftSize);btn.classList.add('listening');btn.textContent='🎤 LISTENING... BLOW!';status.textContent='Listening for your breath... 💨';let started=performance.now();let peak=0;
+  function listen(){analyser.getByteTimeDomainData(data);let sum=0;for(let i=0;i<data.length;i++){let x=(data[i]-128)/128;sum+=x*x}let rms=Math.sqrt(sum/data.length);peak=Math.max(peak,rms);if(rms>.085 || peak>.13 || performance.now()-started>7000){stream.getTracks().forEach(t=>t.stop());ctx.close();candleOff();return}requestAnimationFrame(listen)}
+  listen();
+ }catch(e){btn.classList.remove('listening');btn.textContent='🎤 BLOW INTO MIC';status.textContent='Microphone unavailable. Use “TAP TO BLOW” — same magical result. 💨';}
+}
+</script>
+</body>
+</html>
